@@ -15,14 +15,14 @@ using Nettle
     function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
-        if length(kek) == 128
+        if length(kek) == 16
             cryptalg = "aes128"
-        elseif length(kek) == 192
+        elseif length(kek) == 24
             cryptalg = "aes192"
-        elseif length(kek) == 256
+        elseif length(kek) == 32
             cryptalg = "aes256"
         else
-            error("wrong key length")
+            #error("wrong key length")
         end        
         n = length(plaintext) ÷ 8
         P = zeros(UInt8, n, 8)
@@ -74,15 +74,15 @@ using Nettle
     function aes_unwrap_key(kek::Array{UInt8}, wrapped::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
-        if length(kek) == 128
+        if length(kek) == 16
             cryptalg = "aes128"
-        elseif length(kek) == 192
+        elseif length(kek) == 24
             cryptalg = "aes192"
-        elseif length(kek) == 256
+        elseif length(kek) == 32
             cryptalg = "aes256"
         else
             error("wrong key length")
-        end  
+        end 
         n = length(wrapped) ÷ 8 - 1
         C = zeros(UInt8, n + 1, 8)
         for i in 1:n+1, j in 1:8
