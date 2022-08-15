@@ -5,19 +5,21 @@ export aes_wrap_key, aes_unwrap_key
 using Nettle
 
 """
+    aes_wrap_key(kek, plaintext, iv)
 
 
 
 
 """
-    function aes_wrap_key(kek, plaintext, iv)
+
+    function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
         if length(kek) == 128
             cryptalg = "aes128"
-        else if length(kek) == 192
+        elseif length(kek) == 192
             cryptalg = "aes192"
-        else if length(kek) == 256
+        elseif length(kek) == 256
             cryptalg = "aes256"
         else
             error("wrong key length")
@@ -69,14 +71,14 @@ using Nettle
         return C
     end
 
-    function aes_unwrap_key(kek, wrapped, iv)
+    function aes_unwrap_key(kek::Array{UInt8}, wrapped::Array{UInt8}, [iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6]])
         # for Byte-Array
         cryptalg = ""
         if length(kek) == 128
             cryptalg = "aes128"
-        else if length(kek) == 192
+        elseif length(kek) == 192
             cryptalg = "aes192"
-        else if length(kek) == 256
+        elseif length(kek) == 256
             cryptalg = "aes256"
         else
             error("wrong key length")
@@ -117,16 +119,15 @@ using Nettle
                 end
             end
         end
-        #if iv == A
+        if iv == A
             P = zeros(UInt8, 8*n)
-            #println(R)
             for i in 1:8, j in 1:n
                 P[i + (j - 1) * 8] = R[j + 1, i]
             end
             return P
-        # else
-        #     return error?
-        # end
+        else
+            error("wrong intial vector")
+        end
     end
 
 end # module
