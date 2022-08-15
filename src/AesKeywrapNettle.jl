@@ -1,4 +1,4 @@
-module AesKeywrap
+module AesKeywrapNettle
 
 export aes_wrap_key, aes_unwrap_key
 
