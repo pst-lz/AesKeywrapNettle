@@ -1,0 +1,7 @@
+name = "AesKeywrap"
+uuid = "c66837a1-e1b2-4dbc-90ba-4694c316b086"
+authors = ["Peter"]
+version = "0.1.0"
+
+[deps]
+AES = "15a180a4-738c-4bf0-92bf-fd08aa96a747"
