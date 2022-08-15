@@ -23,7 +23,7 @@ using Nettle
         elseif length(kek) == 32
             cryptalg = "aes256"
         else
-            #error("wrong key length")
+            error("wrong key length")
         end        
         n = length(plaintext) ÷ 8
         P = zeros(UInt8, n, 8)
