@@ -12,7 +12,7 @@ using Nettle
 
 """
 
-    function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
+    function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
         if length(kek) == 128
@@ -71,7 +71,7 @@ using Nettle
         return C
     end
 
-    function aes_unwrap_key(kek::Array{UInt8}, wrapped::Array{UInt8}, [iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6]])
+    function aes_unwrap_key(kek::Array{UInt8}, wrapped::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
         if length(kek) == 128
