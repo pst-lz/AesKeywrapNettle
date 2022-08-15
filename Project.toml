@@ -1,0 +1,4 @@
+name = "AesKeywrapNettle"
+uuid = "d0ff3c94-28b9-43ce-b75b-813f49a99563"
+authors = ["pst-lz <p.stehring@gmail.com>"]
+version = "0.1.0"
