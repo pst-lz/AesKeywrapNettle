@@ -14,6 +14,7 @@ using Nettle
 
     function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
+        println(length(kek))
         cryptalg = ""
         if length(kek) == 16
             cryptalg = "aes128"
