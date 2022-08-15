@@ -2,10 +2,20 @@ module AesKeywrapNettle
 
 export aes_wrap_key, aes_unwrap_key
 
-using AES
+using Nettle
 
     function aes_wrap_key(kek, plaintext, iv)
         # for Byte-Array
+        cryptalg = ""
+        if length(kek) == 128
+            cryptalg = "aes128"
+        else if length(kek) == 192
+            cryptalg = "aes192"
+        else if length(kek) == 256
+            cryptalg = "aes256"
+        else
+            error("wrong key length")
+        end        
         n = length(plaintext) ÷ 8
         P = zeros(UInt8, n, 8)
         for i in 1:n, j in 1:8
@@ -21,7 +31,7 @@ using AES
                 for k in 1:8
                     push!(A, R[i + 1, k])
                 end
-                B = AESECB(A, kek, true)
+                B = encrypt(cryptalg, A, kek)
                 t :: UInt64 = 0
                 t = (n * j) + i
                 if t <= 255
@@ -55,6 +65,16 @@ using AES
 
     function aes_unwrap_key(kek, wrapped, iv)
         # for Byte-Array
+        cryptalg = ""
+        if length(kek) == 128
+            cryptalg = "aes128"
+        else if length(kek) == 192
+            cryptalg = "aes192"
+        else if length(kek) == 256
+            cryptalg = "aes256"
+        else
+            error("wrong key length")
+        end  
         n = length(wrapped) ÷ 8 - 1
         C = zeros(UInt8, n + 1, 8)
         for i in 1:n+1, j in 1:8
@@ -84,7 +104,7 @@ using AES
                 for k in 1:8
                     push!(A, R[i + 1, k])
                 end
-                B = AESECB(A, kek, false)
+                B = decrypt(cryptalg, A, kek)
                 A = copy(B[1:8])
                 for k in 1:8
                     R[i + 1, k] = B[8 + k]
