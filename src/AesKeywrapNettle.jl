@@ -40,7 +40,7 @@ using Nettle
                 for k in 1:8
                     push!(A, R[i + 1, k])
                 end
-                B = encrypt(cryptalg, A, kek)
+                B = encrypt(cryptalg, kek, A)
                 t :: UInt64 = 0
                 t = (n * j) + i
                 if t <= 255
@@ -113,7 +113,7 @@ using Nettle
                 for k in 1:8
                     push!(A, R[i + 1, k])
                 end
-                B = decrypt(cryptalg, A, kek)
+                B = decrypt(cryptalg, kek, A)
                 A = copy(B[1:8])
                 for k in 1:8
                     R[i + 1, k] = B[8 + k]
