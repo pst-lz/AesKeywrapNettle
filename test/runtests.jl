@@ -91,3 +91,27 @@ end
     @test test_wrap_unwrap_iv(kekstring6, datastring6, ivstring6, cipherstring6)
     @test test_wrap_unwrap(kekstring6, datastring6, cipherstring6)
 end
+
+@testset "errors" begin
+    # wrong iv
+    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A0"))
+
+    # wrong kek length unwrap
+    @test_throws ArgumentError aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F0"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6"))
+    
+    # wrong wrapped length unwrap
+    @test_throws ArgumentError aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("A1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6"))
+
+    # wrong iv length unwrap
+    @test_throws ArgumentError aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6C"))
+
+    # wrong kek length wrap
+    @test_throws ArgumentError aes_wrap_key(hex2bytes("A000102030405060708090A0B0C0D0E0F"), hex2bytes("00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6"))
+
+    # wrong plaintext length wrap
+    @test_throws ArgumentError aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("A00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6"))
+
+    # wrong iv length wrap
+    @test_throws ArgumentError aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("00112233445566778899AABBCCDDEEFF"), hex2bytes("AA6A6A6A6A6A6A6A6"))
+
+end
