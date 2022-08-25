@@ -100,27 +100,27 @@ end
     @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F0A"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6"))
     
     # wrong wrapped length unwrap
-    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("AA1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6")) ##
+    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("AA1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong wrapped length unwrap (to short 1)
-    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447"), hex2bytes("A6A6A6A6A6A6A6A6")) ##
+    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447"), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong wrapped length unwrap (to short 2)
-    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("AA"), hex2bytes("A6A6A6A6A6A6A6A6")) ##
+    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes(""), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong iv length unwrap
-    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6CA")) ##
+    @test_throws ErrorException aes_unwrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("1FA68B0A8112B447AEF34BD8FB5A7B829D3E862371D2CFE5"), hex2bytes("A6A6A6A6A6A6A6A6CA"))
 
     # wrong kek length wrap
     @test_throws ErrorException aes_wrap_key(hex2bytes("AA000102030405060708090A0B0C0D0E0F"), hex2bytes("00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong plaintext length wrap
-    @test_throws ErrorException aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("FFAA00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6")) ##
+    @test_throws ErrorException aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("FFAA00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong plaintext length wrap (to short)
     @test_throws ErrorException aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes(""), hex2bytes("A6A6A6A6A6A6A6A6"))
 
     # wrong iv length wrap
-    @test_throws ErrorException aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6"))
+    @test_throws ErrorException aes_wrap_key(hex2bytes("000102030405060708090A0B0C0D0E0F"), hex2bytes("00112233445566778899AABBCCDDEEFF"), hex2bytes("A6A6A6A6A6A6A6A6BB"))
 
 end

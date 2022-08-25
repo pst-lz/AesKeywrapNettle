@@ -41,8 +41,6 @@ julia> aes_wrap_key([0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
         else
             error("wrong key length")
         end
-        println(length(plaintext))
-        println(length(iv))
         if length(iv) != 8
             error("wrong iv length")
         end
