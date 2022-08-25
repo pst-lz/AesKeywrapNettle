@@ -5,13 +5,20 @@ export aes_wrap_key, aes_unwrap_key
 using Nettle
 
 """
-    aes_wrap_key(kek, plaintext, iv)
+    aes_wrap_key(kek, plaintext[, iv])
+Wraps the key "plaintext" using the key "kek" und the initial vector "iv" with the "Advanced Encryption Standard (AES) Key Wrap Algorithm"
+
+# Arguments
+- `kek::Array{UInt8}`: the key-encryption key, possible key lengths for "kek" are 128 bit, 192 bit, and 192 bit
+- `plaintext::Array{UInt8}`: the key (or plaintext) to wrap, the length of "plaintext" must be a multiple of 64 bit
+- `iv::Array{UInt8}`: the 64-bit initial value used during the wrapping process; If no iv is specified, the default iv [0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6] from rfc3394 is used.
+
+# Examples
+```jldoctest
 
 
-
-
+```
 """
-
     function aes_wrap_key(kek::Array{UInt8}, plaintext::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
@@ -71,6 +78,23 @@ using Nettle
         return C
     end
 
+
+"""
+    aes_unwrap_key(kek, wrapped[, iv])
+Unwraps the key "plaintext" using the key "kek" with the "Advanced Encryption Standard (AES) Key Wrap Algorithm"
+The initial vector "iv" is used for integrity check.
+
+# Arguments
+- `kek::Array{UInt8}`: the key-encryption key, possible key lengths for "kek" are 128 bit, 192 bit, and 192 bit
+- `plaintext::Array{UInt8}`: the key (or plaintext) to wrap, the length of "plaintext" must be a multiple of 64 bit
+- `iv::Array{UInt8}`: the 64-bit initial value used during the wrapping process; If no iv is specified, the default iv [0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6] from rfc3394 is used.
+
+# Examples
+```jldoctest
+
+
+```
+"""
     function aes_unwrap_key(kek::Array{UInt8}, wrapped::Array{UInt8}, iv::Array{UInt8}=[0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6])
         # for Byte-Array
         cryptalg = ""
