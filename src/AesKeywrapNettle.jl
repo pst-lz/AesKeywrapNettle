@@ -41,16 +41,15 @@ julia> aes_wrap_key([0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
         else
             error("wrong key length")
         end
+        println(length(plaintext))
+        println(length(iv))
         if length(iv) != 8
             error("wrong iv length")
         end
-        if length(plaintext) % 8 !=0
+        if length(plaintext) % 8 != 0 || length(plaintext) == 0
             error("wrong plaintext length")
         end       
         n = length(plaintext) ÷ 8
-        if n == 0
-            error("wrong plaintext length")
-        end   
         P = zeros(UInt8, n, 8)
         for i in 1:n, j in 1:8
             P[i, j] = plaintext[j + (i - 1) * 8]
