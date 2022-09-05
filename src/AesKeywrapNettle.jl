@@ -1,3 +1,9 @@
+"""
+    AesKeywrapNettle
+
+    AES keywrap in Julia 
+    (uses https://github.com/JuliaCrypto/Nettle.jl for AES)
+"""
 module AesKeywrapNettle
 
 export aes_wrap_key, aes_unwrap_key
