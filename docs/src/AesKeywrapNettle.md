@@ -1,13 +1,19 @@
-The AesKeywrapNettle Module.jl
+# The AesKeywrapNettle Module.jl
 
+```@docs
 AesKeywrapNettle
+```
 
-Module Index
+## Module Index
 
+```@index
 Modules = [AesKeywrapNettle]
 Order   = [:constant, :type, :function, :macro]
+```
 
-Detailed API
+## Detailed API
 
+```@autodocs
 Modules = [AesKeywrapNettle]
 Order   = [:constant, :type, :function, :macro]
+```
