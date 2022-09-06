@@ -7,5 +7,5 @@ version = "0.1.1"
 Nettle = "49dea1ee-f6fa-5aa6-9a11-8816cee7d4b9"
 
 [compat]
+Nettle = "^0.5, 1"
 julia = "^1.6"
-Nettle = "^0.5"
