@@ -1,7 +1,7 @@
 name = "AesKeywrapNettle"
 uuid = "d0ff3c94-28b9-43ce-b75b-813f49a99563"
 authors = ["Peter Stehring <p.stehring@gmail.com>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 Nettle = "49dea1ee-f6fa-5aa6-9a11-8816cee7d4b9"
